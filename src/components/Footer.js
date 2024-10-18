@@ -1,4 +1,5 @@
 import React from 'react';
+import Section from './ComponentsForComponents/ComponentForFooter';
 
 function Footer() {
     return (
@@ -9,33 +10,11 @@ function Footer() {
                 <button type="submit" className="bg-white text-black px-6 py-2 rounded-r-md hover:bg-gray-200">Subscribe</button>
               </form>
               <div className="flex justify-around">
-                <div className="footer-link">
-                  <h3 className="font-semibold">Logo</h3>
-                  <ul>
-                    <li><a href="#" className="hover:text-gray-400">About Us</a></li>
-                    <li><a href="#" className="hover:text-gray-400">Privacy Policy</a></li>
-                    <li><a href="#" className="hover:text-gray-400">Terms of Service</a></li>
-                    <li><a href="#" className="hover:text-gray-400">Contact</a></li>
-                  </ul>
-                </div>
-                <div className="footer-link">
-                  <h3 className="font-semibold">Company</h3>
-                  <ul>
-                    <li><a href="#" className="hover:text-gray-400">Careers</a></li>
-                    <li><a href="#" className="hover:text-gray-400">Blog</a></li>
-                    <li><a href="#" className="hover:text-gray-400">Press</a></li>
-                    <li><a href="#" className="hover:text-gray-400">Partners</a></li>
-                  </ul>
-                </div>
-                <div className="footer-link">
-                  <h3 className="font-semibold">Support</h3>
-                  <ul>
-                    <li><a href="#" className="hover:text-gray-400">Help Center</a></li>
-                    <li><a href="#" className="hover:text-gray-400">Safety Center</a></li>
-                    <li><a href="#" className="hover:text-gray-400">Community Guidelines</a></li>
-                    <li><a href="#" className="hover:text-gray-400">Contact Support</a></li>
-                  </ul>
-                </div>
+
+                <Section title = "Logo" li1 = "About Us" li2 = "Privacy Policy" li3 = "Terms of Service" li4 = "Contact" />
+                <Section title = "Company" li1 = "Careers" li2 = "Blog" li3 = "Press" li4 = "Partners" />
+                <Section title = "Support" li1 = "Help Center" li2 = "Safety Center" li3 = "Community Guidelines" li4 = "Contact Support" />
+                
               </div>
             </footer>
       );

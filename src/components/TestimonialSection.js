@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Review from './ComponentsForComponents/Customer';
 function TestimonialSection() {
     return (
         <section className="py-16 bg-gray-100">
@@ -11,69 +11,12 @@ function TestimonialSection() {
               </p>
             </div>
     
+            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <div className="flex items-center mb-4">
-                  <div className="flex items-center mr-4">
-                    <img
-                      src="https://picsum.photos/50"
-                      alt="John Doe"
-                      className="rounded-full w-10 h-10"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-bold text-gray-800">John Doe</h4>
-                    <p className="text-gray-600">CEO, ABC Company</p>
-                  </div>
-                </div>
-                <p className="text-gray-600">
-                  I've been using this platform for a while now and it has
-                  completely transformed the way I find freelancers. The auto
-                  bidding functionality is a game changer.
-                </p>
-              </div>
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <div className="flex items-center mb-4">
-                  <div className="flex items-center mr-4">
-                    <img
-                      src="https://picsum.photos/50"
-                      alt="John Doe"
-                      className="rounded-full w-10 h-10"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-bold text-gray-800">John Doe</h4>
-                    <p className="text-gray-600">CEO, ABC Company</p>
-                  </div>
-                </div>
-                <p className="text-gray-600">
-                  I've been using this platform for a while now and it has
-                  completely transformed the way I find freelancers. The auto
-                  bidding functionality is a game changer.
-                </p>
-              </div>
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <div className="flex items-center mb-4">
-                  <div className="flex items-center mr-4">
-                    <img
-                      src="https://picsum.photos/50"
-                      alt="John Doe"
-                      className="rounded-full w-10 h-10"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-bold text-gray-800">John Doe</h4>
-                    <p className="text-gray-600">CEO, ABC Company</p>
-                  </div>
-                </div>
-                <p className="text-gray-600">
-                  I've been using this platform for a while now and it has
-                  completely transformed the way I find freelancers. The auto
-                  bidding functionality is a game changer.
-                </p>
-              </div>
-    
-              {/* Add more testimonials as needed */}
+            <Review name = "John Doe" about = "CEO, ABC Company" description = " I've been using this platform for a while now and it has completely transformed the way I find freelancers. The auto bidding functionality is a game changer." />
+            <Review name = "John Doe" about = "CEO, ABC Company" description = " I've been using this platform for a while now and it has completely transformed the way I find freelancers. The auto bidding functionality is a game changer." />
+            <Review name = "John Doe" about = "CEO, ABC Company" description = " I've been using this platform for a while now and it has completely transformed the way I find freelancers. The auto bidding functionality is a game changer." />
+            
             </div>
           </div>
         </section>

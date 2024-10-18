@@ -10,9 +10,7 @@ function HeroHeader() {
           <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Get Started</button>
           <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded ml-4">Learn More</button>
         </div>
-        {/* <div className="flex justify-center">
-          <img src="https://picsum.photos/100/100" alt="Hero Image" className="w-24 h-24 rounded-full" />
-        </div> */}
+       
       </div>
     </section>
   );
