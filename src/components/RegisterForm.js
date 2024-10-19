@@ -14,7 +14,7 @@ export function RegisterForm() {
             <Input placeholder="Password" type="password" />
             <Input placeholder="Confirm Password" type="password" />
 
-            <button className="mt-4 bg-tertiary hover:bg-secondary bg-orange-300 hover:bg-orange-500  font-bold py-3 px-6 rounded-lg transition duration-200 transform hover:scale-105">
+            <button className="text-white mt-4 bg-tertiary hover:bg-secondary bg-black hover:bg-gray-700  font-bold py-3 px-6 rounded-lg transition duration-200 transform hover:scale-105">
               Register
             </button>
             <p className="text-sm text-gray-600 text-center mt-4">

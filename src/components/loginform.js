@@ -9,7 +9,7 @@ export function LoginForm() {
             <Input placeholder = "E-mail" type = "email"/>
             <Input placeholder = "Password" type = "password"/>
             
-            <button className="mt-4 bg-tertiary bg-orange-300 hover:bg-orange-500 text-primary-dark font-bold py-3 px-6 rounded-lg transition duration-200 transform hover:scale-105">Login </button>
+            <button className="mt-4 bg-tertiary bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-lg transition duration-200 transform hover:scale-105">Login </button>
             
             <p className="text-sm text-gray-600 text-center mt-4">
               Don't have an account?{' '}
