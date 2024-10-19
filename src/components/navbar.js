@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Li from './ComponentsForComponents/Link';
+import './style.css';
 
 
 function Navbar() {
   return (
-    <nav class="bg-white px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
+    <nav className="light-black px-2 sm:px-4 py-2.5 rounded">
+
+
     <div class="container flex flex-wrap items-center justify-between mx-auto">
       <a href="/" class="flex items-center">
         <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Logo</span>
@@ -16,7 +19,7 @@ function Navbar() {
       </button>
       <div class="hidden w-full md:block md:w-auto" id="navbar-default">
         
-        <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+      <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg custom-bg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white light-black dark:custom-bg-dark md:dark:bg-black-800 dark:border-gray-700">
          <Li value = "Discover"/>
          <Li value = "Services"/>
          <Li value = "Pricing"/>
@@ -25,8 +28,8 @@ function Navbar() {
         
       </div>
       <div className="flex items-center space-x-4">
-        <Link to="/register" className="px-4 py-2 text-sm font-medium text-white bg-orange-500 rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-300 dark:bg-orange-500 dark:hover:bg-orange-600 dark:focus:ring-orange-800">Register</Link>
-        <Link to="/login" className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-lg hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-300 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Login</Link>
+      <Link to="/register" className="bg-black text-white px-4 py-2 rounded hover:bg-gray-700"> Register</Link>
+        <Link to="/login" className="bg-black text-white px-4 py-2 rounded hover:bg-gray-700">Login</Link>
       </div>
     </div>
   </nav>

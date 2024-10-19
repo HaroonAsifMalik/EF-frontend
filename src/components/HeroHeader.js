@@ -1,16 +1,31 @@
 import React from 'react';
+import './HeroHeader.css';
 
 function HeroHeader() {
   return (
-    <section className="h-screen bg-cover bg-center" style={{ backgroundImage: 'url(https://fastly.picsum.photos/id/679/2000/1000.jpg?hmac=CbYBm8U2P-MeCwM9Lsioobgul4hwnHkLXKfJ11JRnls)' }}>
-      <div className="container mx-auto p-4 pt-6 md:p-6 lg:p-12">
-        <h1 className="text-4xl font-bold text-white mb-4">Transforming Freelancer Platforms with Auto Bidding</h1>
-        <p className="text-xl text-gray-200 mb-8">Effortlessly streamline your bidding process and win more projects.</p>
-        <div className="flex justify-center mb-8">
-          <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Get Started</button>
-          <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded ml-4">Learn More</button>
-        </div>
-       
+    <section
+      className="h-screen bg-cover bg-center"
+      style={{ backgroundImage: 'url(https://images.pexels.com/photos/15913108/pexels-photo-15913108.jpeg?cs=srgb&dl=pexels-marcin-jozwiak-199600-15913108.jpg&fm=jpg)' }}
+    >
+      <div className="container mx-auto p-4 pt-50 md:p-6 lg:p-12">
+        <h1 style={{ paddingTop: '100px', paddingLeft: '50px'}} className="text-4xl font-bold text-white mb-4">
+          <span className="span-txt one animate-fadeInUp">
+            Transforing
+          </span>
+          <br />
+          <span className="span-txt two animate-fadeInUp">
+            Freelancing
+          </span>
+          <br />
+          <span className="span-txt three animate-fadeInUp">
+            Platforms with
+          </span>
+          <br />
+          <span className="span-txt four animate-fadeInUp">
+            auto-bidding
+          </span>
+        
+        </h1>
       </div>
     </section>
   );

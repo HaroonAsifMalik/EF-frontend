@@ -3,7 +3,7 @@ import Section from './ComponentsForComponents/ComponentForFooter';
 
 function Footer() {
     return (
-            <footer className="bg-gray-900 text-white p-20 text-center">
+            <footer className="bg-black text-white p-20 text-center">
               <h2 className="text-3xl font-bold mb-8">Stay Updated with Our Newsletter</h2>
               <form className="mb-8">
                 <input type="email" placeholder="Enter your email" className="p-2 rounded-l-md"/>
@@ -21,3 +21,6 @@ function Footer() {
 }
 
 export default Footer;
+
+
+

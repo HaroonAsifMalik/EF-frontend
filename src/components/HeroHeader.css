@@ -1,0 +1,58 @@
+@keyframes fadeInUp {
+    from {
+      transform: translate3d(0, 100%, 0);
+      opacity: 0;
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+  
+  .span-txt {
+    display: inline-block;
+    opacity: 0;
+    animation-fill-mode: forwards; 
+    font-size: 75px;
+    margin-bottom: 40px;
+    color: black;
+  }
+  
+  .animate-fadeInUp {
+    animation: fadeInUp 1s ease-in-out forwards; 
+  }
+  
+  .one {
+    animation-delay: 0s;
+  }
+  
+  .two {
+    animation-delay: 0.5s;
+  }
+  
+  .three {
+    animation-delay: 1s;
+  }
+  
+  .four {
+    animation-delay: 1.5s;
+    margin-bottom: 50px;
+  }
+  
+  .five {
+    animation-delay: 2s;
+    display: inline-block;
+    opacity: 0;
+    animation-fill-mode: forwards; 
+    font-size: 25px;
+    margin-bottom: 1px;
+  }
+  
+  .six {
+    animation-delay: 2.5s;
+    display: inline-block;
+    opacity: 0;
+    animation-fill-mode: forwards; 
+    font-size: 25px;
+  }
+  

@@ -21,7 +21,7 @@ function Plan(props)
             <span>{props.support}t</span>
           </li>
         </ul>
-        <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+        <button className="bg-black text-white px-6 py-3 rounded hover:bg-gray-700">
           Sign Up
         </button>
       </div>

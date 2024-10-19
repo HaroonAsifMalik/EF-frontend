@@ -3,7 +3,7 @@ import Feature from './ComponentsForComponents/Feature';
 
 function BenefitsSection() {
     return (
-        <section className="p-20 text-center">
+        <section className="p-20 text-center" style = {{backgroundColor:"white"}}>
           <h2 className="text-3xl font-bold mb-8">Discover the Power of Auto Bidding</h2>
           <div className="flex justify-around">
 
