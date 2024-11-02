@@ -1,6 +1,7 @@
 import React from 'react';
 import Section from './ComponentsForComponents/ComponentForFooter';
 
+// git testing 
 function Footer() {
     return (
             <footer className="bg-black text-white p-20 text-center">
