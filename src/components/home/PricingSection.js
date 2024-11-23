@@ -1,5 +1,5 @@
 import React from 'react';
-import Plan from './ComponentsForComponents/Plans';
+import Plan from './Plan';
 
 // static data for pricing section
 const pricingPlans = [

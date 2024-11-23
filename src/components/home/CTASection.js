@@ -1,5 +1,5 @@
 import React from 'react';
-import Feature from './ComponentsForComponents/FeatureForCTA';
+import Feature from '../feature/FeatureForCTA';
 
 // static data for featuer section
 const featuresData = [

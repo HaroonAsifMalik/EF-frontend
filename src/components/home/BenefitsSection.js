@@ -1,5 +1,5 @@
 import React from 'react';
-import Feature from './ComponentsForComponents/Feature';
+import Feature from '../feature/Feature';
 
 // static data for benefits section
 const benefits = [

@@ -1,5 +1,5 @@
 import React from 'react';
-import Review from './ComponentsForComponents/Customer';
+import Review from './Review';
 
 // static data for testimonials section
 const testimonials = [

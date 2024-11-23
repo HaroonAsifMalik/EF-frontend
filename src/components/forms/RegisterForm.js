@@ -1,5 +1,5 @@
 import React from "react";
-import Input from "./ComponentsForComponents/Input";
+import Input from "../input/Input";
 
 export function RegisterForm() {
     return (

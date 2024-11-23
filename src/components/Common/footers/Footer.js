@@ -1,5 +1,5 @@
 import React from 'react';
-import Section from './ComponentsForComponents/ComponentForFooter';
+import FooterSection from './FooterSection';
 
 // static data for footer section
 const footerSections = [
@@ -34,7 +34,7 @@ function Footer() {
       </form>
       <div className="flex justify-around">
         {footerSections.map((section, index) => (
-          <Section key={index} title={section.title} li1={section.links[0]} li2={section.links[1]} li3={section.links[2]} li4={section.links[3]} />
+          <FooterSection key={index} title={section.title} li1={section.links[0]} li2={section.links[1]} li3={section.links[2]} li4={section.links[3]} />
         ))}
       </div>
     </footer>

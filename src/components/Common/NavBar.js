@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Li from './ComponentsForComponents/Link';
-import './style.css';
+import Li from '../link/Link';
+// import './style.css';
 
 
 // Static data for navbar links

@@ -1,4 +1,5 @@
-import Input from "./ComponentsForComponents/Input";
+import Input from "../input/Input";
+
 export function LoginForm() {
     return (
       <div className="container mx-auto p-6 h-screen flex justify-center items-center">
@@ -24,3 +25,5 @@ export function LoginForm() {
     );
   }
   
+
+  export default LoginForm;

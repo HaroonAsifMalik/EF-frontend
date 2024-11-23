@@ -1,5 +1,5 @@
 import React from 'react';
-import './HeroHeader.css';
+import './HeroHeader.css'
 
 function HeroHeader() {
   return (
