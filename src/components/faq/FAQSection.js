@@ -1,5 +1,5 @@
 import React from 'react';
-import FAQ from './ComponentForFAQ';
+import FAQ from './FAQ';
 
 // static data for FAQ section
 const faqData = [

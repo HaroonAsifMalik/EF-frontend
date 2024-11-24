@@ -1,5 +1,6 @@
 import React from 'react';
-import Feature from '../feature/FeatureForCTA';
+import FeatureCard from '../feature/FeatureCard';
+
 
 // static data for featuer section
 const featuresData = [
@@ -23,7 +24,7 @@ function CTASection() {
       <h2 className="text-3xl font-bold mb-8">Unlock Your Potential with Our Powerful Bidding Platform</h2>
       <div className="flex justify-around">
         {featuresData.map((feature, index) => (
-          <Feature
+          <FeatureCard
             key={index}
             img={feature.img}
             alt={feature.alt}

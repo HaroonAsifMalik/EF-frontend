@@ -1,5 +1,5 @@
 import React from 'react';
-import Feature from '../feature/Feature';
+import FeatureCard from '../feature/FeatureCard';
 
 // static data for benefits section
 const benefits = [
@@ -23,7 +23,7 @@ function BenefitsSection() {
       <h2 className="text-3xl font-bold mb-8">Discover the Power of Auto Bidding</h2>
       <div className="flex justify-around">
         {benefits.map((benefit, index) => (
-          <Feature
+          <FeatureCard
             key={index}
             title={benefit.title}
             description={benefit.description}
