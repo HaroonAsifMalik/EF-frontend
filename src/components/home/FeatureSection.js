@@ -1,5 +1,5 @@
 import React from 'react';
-import Feature from "../feature/FeatureForFeatureSection";
+import FeatureCard from '../feature/FeatureCard';
 
 // static data for features section
 const features = [
@@ -31,7 +31,7 @@ function FeatureSection() {
       </h2>
       <div className="flex justify-around">
         {features.map((feature, index) => (
-          <Feature
+          <FeatureCard
             key={index}
             img={feature.img}
             alt={feature.alt}
