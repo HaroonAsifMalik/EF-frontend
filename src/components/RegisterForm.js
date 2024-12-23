@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import Input from "./ComponentsForComponents/Input";
 
 export function RegisterForm() {
-
   const [credentials, setCredentials] = useState({
-    name: "",
+    display_name: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    confirm_password: "",
   });
 
   function handleChange(event) {
@@ -21,39 +20,54 @@ export function RegisterForm() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    fetch('http://localhost:3000/register', {
-      method: 'POST',
+    if (credentials.password !== credentials.confirm_password) {
+      console.log("Passwords do not match!");
+      return;
+    }
+
+    fetch("http://localhost:8000/api/v1/accounts/sign-up/", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(credentials),
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.access && data.refresh) {
+          localStorage.setItem("accessToken", data.access);
+          localStorage.setItem("refreshToken", data.refresh);
+          console.log("Registration successful!");
+          window.location.href = "/dashboard";
+        } else {
+          console.log(data.message || "Something went wrong!");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        console.log("An error occurred. Please try again.");
+      });
 
     setCredentials({
-      name: "",
+      display_name: "",
       email: "",
       password: "",
-      confirmPassword: "",
+      confirm_password: "",
     });
   }
 
   return (
     <div className="container mx-auto p-6 h-screen flex justify-center items-center">
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">Create an Account</h2>
+        <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
+          Create an Account
+        </h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <Input
             placeholder="Name"
             type="text"
-            name="name"
-            value={credentials.name}
+            name="display_name"
+            value={credentials.display_name}
             onChange={handleChange}
           />
           <Input
@@ -73,8 +87,8 @@ export function RegisterForm() {
           <Input
             placeholder="Confirm Password"
             type="password"
-            name="confirmPassword"
-            value={credentials.confirmPassword}
+            name="confirm_password"
+            value={credentials.confirm_password}
             onChange={handleChange}
           />
 
@@ -82,8 +96,11 @@ export function RegisterForm() {
             Register
           </button>
           <p className="text-sm text-gray-600 text-center mt-4">
-            Already have an account?{' '}
-            <a href="/Login" className="text-tertiary hover:text-secondary transition duration-200 underline">
+            Already have an account?{" "}
+            <a
+              href="/Login"
+              className="text-tertiary hover:text-secondary transition duration-200 underline"
+            >
               <strong>Login</strong>
             </a>
           </p>

@@ -21,7 +21,7 @@ const Home = () => {
       <CTASection/> 
       <TeamSection />
       <FAQSection/>
-     <Footer/>
+      <Footer/>
     </div>
   );
 };
