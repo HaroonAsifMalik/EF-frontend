@@ -1,8 +1,8 @@
-// Login.js
+
 import React from 'react';
-import Navbar from '../components/navbar';
-import Footer from '../components/Footer';
-import AboutSection from '../components/AboutSection';
+import Navbar from '../components/Common/NavBar';
+import Footer from '../components/Common/footers/Footer'
+import AboutSection from '../components/about/AboutSection';
 
 const Login = () => {
   return (

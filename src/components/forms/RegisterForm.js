@@ -1,14 +1,15 @@
+import React, { useState } from "react";
+import Input from "../input/Input";
 
-import React from "react";
-import Input from "./input/Input";
-
-export function LoginForm() {
-  const [credentials, setCredentials] = React.useState({
+export function RegisterForm() {
+  const [credentials, setCredentials] = useState({
+    display_name: "",
     email: "",
     password: "",
+    confirm_password: "",
   });
 
-  const [errorMessage, setErrorMessage] = React.useState("");
+
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -21,37 +22,39 @@ export function LoginForm() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    fetch("http://localhost:8000/api/v1/accounts/sign-in/", {
+    if (credentials.password !== credentials.confirm_password) {
+      console.log("Passwords do not match!");
+      return;
+    }
+
+    fetch("http://localhost:8000/api/v1/accounts/sign-up/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(credentials),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Login failed! Please check your credentials.");
-        }
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((data) => {
         if (data.access && data.refresh) {
           localStorage.setItem("accessToken", data.access);
           localStorage.setItem("refreshToken", data.refresh);
-          localStorage.setItem("user", JSON.stringify(data.user));
+          console.log("Registration successful!");
           window.location.href = "/dashboard";
         } else {
-          setErrorMessage(data.message || "Login failed!");
+          console.log(data.message || "Something went wrong!");
         }
       })
       .catch((error) => {
         console.error("Error:", error);
-        setErrorMessage(error.message || "An unexpected error occurred.");
+        console.log("An error occurred. Please try again.");
       });
 
     setCredentials({
+      display_name: "",
       email: "",
       password: "",
+      confirm_password: "",
     });
   }
 
@@ -59,20 +62,23 @@ export function LoginForm() {
     <div className="container mx-auto p-6 h-screen flex justify-center items-center">
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
-          Login To Your Account
+          Create an Account
         </h2>
-        {errorMessage && (
-          <p className="text-red-500 text-center mb-4">{errorMessage}</p>
-        )}
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <Input
-            placeholder="E-mail"
+            placeholder="Name"
+            type="text"
+            name="display_name"
+            value={credentials.display_name}
+            onChange={handleChange}
+          />
+          <Input
+            placeholder="Email"
             type="email"
             name="email"
             value={credentials.email}
             onChange={handleChange}
           />
-
           <Input
             placeholder="Password"
             type="password"
@@ -80,18 +86,24 @@ export function LoginForm() {
             value={credentials.password}
             onChange={handleChange}
           />
+          <Input
+            placeholder="Confirm Password"
+            type="password"
+            name="confirm_password"
+            value={credentials.confirm_password}
+            onChange={handleChange}
+          />
 
-          <button className="mt-4 bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-lg transition duration-200 transform hover:scale-105">
-            Login
+          <button className="text-white mt-4 bg-tertiary hover:bg-secondary bg-black hover:bg-gray-700 font-bold py-3 px-6 rounded-lg transition duration-200 transform hover:scale-105">
+            Register
           </button>
-
           <p className="text-sm text-gray-600 text-center mt-4">
-            Don't have an account?{" "}
+            Already have an account?{" "}
             <a
-              href="/register"
+              href="/Login"
               className="text-tertiary hover:text-secondary transition duration-200 underline"
             >
-              <strong>Register</strong>
+              <strong>Login</strong>
             </a>
           </p>
         </form>
@@ -99,3 +111,5 @@ export function LoginForm() {
     </div>
   );
 }
+
+export default RegisterForm;

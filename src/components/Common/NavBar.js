@@ -1,0 +1,44 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Li from '../link/Link';
+// import './style.css';
+
+
+// Static data for navbar links
+const navbarLinks = [
+  { id: 1, label: "Discover", href: "/" },
+  { id: 2, label: "Services", href: "/services" },
+  { id: 3, label: "Pricing", href: "/pricing" },
+  { id: 4, label: "More Options", href: "/more-options" }
+];
+
+function Navbar() {
+  return (
+    <nav className="light-black px-2 sm:px-4 py-2.5 rounded">
+
+
+    <div className="container flex flex-wrap items-center justify-between mx-auto">
+      <a href="/" className="flex items-center">
+        <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Logo</span>
+      </a>
+      <button data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+        <span className="sr-only">Open main menu</span>
+        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+      </button>
+      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+        <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg custom-bg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white light-black dark:custom-bg-dark md:dark:bg-black-800 dark:border-gray-700">
+            {navbarLinks.map(link => (
+              <Li key={link.id} value={link.label} />
+            ))}
+        </ul>
+      </div>
+      <div className="flex items-center space-x-4">
+      <Link to="/register" className="bg-black text-white px-4 py-2 rounded hover:bg-gray-700"> Register</Link>
+        <Link to="/login" className="bg-black text-white px-4 py-2 rounded hover:bg-gray-700">Login</Link>
+      </div>
+    </div>
+  </nav>
+  );
+}
+
+export default Navbar;

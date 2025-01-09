@@ -1,6 +1,5 @@
-
+import Input from "../input/Input";
 import React from "react";
-import Input from "./input/Input";
 
 export function LoginForm() {
   const [credentials, setCredentials] = React.useState({
