@@ -1,4 +1,4 @@
-import Input from "./ComponentsForComponents/Input";
+import Input from "../input/Input";
 import React from "react";
 
 export function LoginForm() {
