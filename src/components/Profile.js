@@ -1,19 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Profile = () => {
-  const initialUser = {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    avatar: '/images/user.jpg',
-    badges: 3,
-    accountType: 'Upwork',
-    ratings: 12,
-    responseTime: '1 hour',
-    skills: ['Reactjs', 'Django', 'TailwindCSS'],
-    categories: ['Web Development'],
-    jobSuccessScore: 70,
-  };
-
   const tips = [
     {
       title: 'Unknown Infostealer Data - 520 Records',
@@ -29,8 +16,30 @@ const Profile = () => {
     },
   ];
 
-  const [user, setUser] = useState(initialUser);
+  const getInitialUser = () => {
+    const storedUser = localStorage.getItem('user');
+    return storedUser
+      ? JSON.parse(storedUser)
+      : {
+          name: '',
+          email: '',
+          // avatar: '',
+          // badges: '',
+          // accountType: '',
+          // ratings: '',
+          // responseTime: '',
+          // skills: [],
+          // categories: [],
+          // jobSuccessScore: 0,
+        };
+  };
+
+  const [user, setUser] = useState(getInitialUser());
   const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(user));
+  }, [user]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -49,19 +58,19 @@ const Profile = () => {
     <div className="flex-grow p-6 bg-gray-100 text-black">
       <div className="bg-white p-6 rounded-lg shadow mb-6">
         <div className="flex items-center mb-4">
-          <img src={user.avatar} alt="User" className="w-24 h-24 rounded-full mr-4" />
+          <img src={user.avatar || '/default-avatar.png'} alt="User" className="w-24 h-24 rounded-full mr-4" />
           <div>
             <h1 className="text-2xl font-bold">
               {isEditing ? (
                 <input
                   type="text"
                   name="name"
-                  value={user.name}
+                  value={user.display_name }
                   onChange={handleInputChange}
                   className="border rounded px-2"
                 />
               ) : (
-                user.name
+                user.display_name
               )}
             </h1>
             <p className="text-gray-600">
@@ -82,19 +91,19 @@ const Profile = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-gray-50 p-4 rounded-lg shadow">
             <h2 className="text-lg font-bold">Badges</h2>
-            <p className="text-gray-600">{user.badges}</p>
+            <p className="text-gray-600">{user.badges || 0}</p>
           </div>
           <div className="bg-gray-50 p-4 rounded-lg shadow">
             <h2 className="text-lg font-bold">Account</h2>
-            <p className="text-gray-600">{user.accountType}</p>
+            <p className="text-gray-600">{user.accountType|| 0}</p>
           </div>
           <div className="bg-gray-50 p-4 rounded-lg shadow">
             <h2 className="text-lg font-bold">Ratings</h2>
-            <p className="text-gray-600">{user.ratings}</p>
+            <p className="text-gray-600">{user.ratings|| 0}</p>
           </div>
           <div className="bg-gray-50 p-4 rounded-lg shadow">
             <h2 className="text-lg font-bold">Response Time</h2>
-            <p className="text-gray-600">{user.responseTime}</p>
+            <p className="text-gray-600">{user.responseTime|| 0}</p>
           </div>
           <div className="bg-gray-50 p-4 rounded-lg shadow">
             <h2 className="text-lg font-bold">Skills</h2>
@@ -102,12 +111,12 @@ const Profile = () => {
               {isEditing ? (
                 <input
                   type="text"
-                  value={user.skills.join(',')}
+                  // value={user.skills.join(',')}
                   onChange={handleSkillsChange}
                   className="border rounded px-2"
                 />
               ) : (
-                user.skills.join(', ')
+               1
               )}
             </p>
           </div>
@@ -117,12 +126,12 @@ const Profile = () => {
               {isEditing ? (
                 <input
                   type="text"
-                  value={user.categories.join(',')}
+                  // value={user.categories.join(',')}
                   onChange={handleCategoriesChange}
                   className="border rounded px-2"
                 />
               ) : (
-                user.categories.join(', ')
+                1
               )}
             </p>
           </div>
