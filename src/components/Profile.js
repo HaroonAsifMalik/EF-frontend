@@ -1,165 +1,138 @@
 import React, { useState, useEffect } from 'react';
 
 const Profile = () => {
-  const tips = [
-    {
-      title: 'Unknown Infostealer Data - 520 Records',
-      description: 'Lorem ipsum dolor sit amet consectetur. Mattis neque.',
-    },
-    {
-      title: 'Enhance Your Profile with a Professional Headline',
-      description: 'Lorem ipsum dolor sit amet consectetur. Mattis neque.',
-    },
-    {
-      title: 'Add Relevant Skills to Your Profile',
-      description: 'Lorem ipsum dolor sit amet consectetur. Mattis neque.',
-    },
-  ];
-
-  const getInitialUser = () => {
-    const storedUser = localStorage.getItem('user');
-    return storedUser
-      ? JSON.parse(storedUser)
-      : {
-          name: '',
-          email: '',
-          // avatar: '',
-          // badges: '',
-          // accountType: '',
-          // ratings: '',
-          // responseTime: '',
-          // skills: [],
-          // categories: [],
-          // jobSuccessScore: 0,
-        };
-  };
-
-  const [user, setUser] = useState(getInitialUser());
+  const [profile, setProfile] = useState({
+    id: null,
+    name: '',
+    email: '',
+    phone: '',
+    bio: '',
+    image: '',
+  });
   const [isEditing, setIsEditing] = useState(false);
 
+  // Fetch the user profile data from the backend
   useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(user));
-  }, [user]);
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch('https://your-backend-api.com/profile'); // Replace with your backend API endpoint
+        const data = await response.json();
+        setProfile(data);
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+    setProfile({ ...profile, [name]: value });
   };
 
-  const handleSkillsChange = (e) => {
-    setUser({ ...user, skills: e.target.value.split(',') });
-  };
+  const handleSaveProfile = async () => {
+    try {
+      const response = await fetch(`https://your-backend-api.com/profile/${profile.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(profile),
+      });
+      const updatedProfile = await response.json();
 
-  const handleCategoriesChange = (e) => {
-    setUser({ ...user, categories: e.target.value.split(',') });
+      // Update the frontend with the updated profile
+      setProfile(updatedProfile);
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
   };
 
   return (
     <div className="flex-grow p-6 bg-gray-100 text-black">
       <div className="bg-white p-6 rounded-lg shadow mb-6">
-        <div className="flex items-center mb-4">
-          <img src={user.avatar || '/default-avatar.png'} alt="User" className="w-24 h-24 rounded-full mr-4" />
-          <div>
-            <h1 className="text-2xl font-bold">
-              {isEditing ? (
-                <input
-                  type="text"
-                  name="name"
-                  value={user.display_name }
-                  onChange={handleInputChange}
-                  className="border rounded px-2"
-                />
-              ) : (
-                user.display_name
-              )}
-            </h1>
-            <p className="text-gray-600">
-              {isEditing ? (
-                <input
-                  type="email"
-                  name="email"
-                  value={user.email}
-                  onChange={handleInputChange}
-                  className="border rounded px-2"
-                />
-              ) : (
-                user.email
-              )}
-            </p>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="bg-gray-50 p-4 rounded-lg shadow">
-            <h2 className="text-lg font-bold">Badges</h2>
-            <p className="text-gray-600">{user.badges || 0}</p>
-          </div>
-          <div className="bg-gray-50 p-4 rounded-lg shadow">
-            <h2 className="text-lg font-bold">Account</h2>
-            <p className="text-gray-600">{user.accountType|| 0}</p>
-          </div>
-          <div className="bg-gray-50 p-4 rounded-lg shadow">
-            <h2 className="text-lg font-bold">Ratings</h2>
-            <p className="text-gray-600">{user.ratings|| 0}</p>
-          </div>
-          <div className="bg-gray-50 p-4 rounded-lg shadow">
-            <h2 className="text-lg font-bold">Response Time</h2>
-            <p className="text-gray-600">{user.responseTime|| 0}</p>
-          </div>
-          <div className="bg-gray-50 p-4 rounded-lg shadow">
-            <h2 className="text-lg font-bold">Skills</h2>
-            <p className="text-gray-600">
-              {isEditing ? (
-                <input
-                  type="text"
-                  // value={user.skills.join(',')}
-                  onChange={handleSkillsChange}
-                  className="border rounded px-2"
-                />
-              ) : (
-               1
-              )}
-            </p>
-          </div>
-          <div className="bg-gray-50 p-4 rounded-lg shadow">
-            <h2 className="text-lg font-bold">Categories</h2>
-            <p className="text-gray-600">
-              {isEditing ? (
-                <input
-                  type="text"
-                  // value={user.categories.join(',')}
-                  onChange={handleCategoriesChange}
-                  className="border rounded px-2"
-                />
-              ) : (
-                1
-              )}
-            </p>
-          </div>
-          <div className="bg-gray-50 p-4 rounded-lg shadow">
-            <h2 className="text-lg font-bold">Job Success Score</h2>
-            <p className="text-gray-600">{user.jobSuccessScore}%</p>
-          </div>
-        </div>
-        <button
-          onClick={() => setIsEditing(!isEditing)}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-        >
-          {isEditing ? 'Save' : 'Edit'}
-        </button>
-      </div>
-      <div className="bg-white p-6 rounded-lg shadow">
-        <h2 className="text-lg font-bold">Tips to Enhance Profile</h2>
-        <div className="mt-4">
-          {tips.map((tip, index) => (
-            <div key={index} className="mb-4 p-4 bg-gray-100 rounded-lg">
-              <h3 className="font-bold">{tip.title}</h3>
-              <p className="text-sm text-gray-600">{tip.description}</p>
-            </div>
-          ))}
+        <h1 className="text-2xl font-bold mb-4">Profile</h1>
+        <div>
+          <img
+            src={profile.image}
+            alt={profile.name}
+            className="w-32 h-32 object-cover mb-4 rounded-full"
+          />
+          {isEditing ? (
+            <>
+              <input
+                type="text"
+                name="name"
+                value={profile.name}
+                onChange={handleInputChange}
+                placeholder="Name"
+                className="border rounded px-2 py-1 mb-2 w-full"
+              />
+              <input
+                type="email"
+                name="email"
+                value={profile.email}
+                onChange={handleInputChange}
+                placeholder="Email"
+                className="border rounded px-2 py-1 mb-2 w-full"
+              />
+              <input
+                type="text"
+                name="phone"
+                value={profile.phone}
+                onChange={handleInputChange}
+                placeholder="Phone"
+                className="border rounded px-2 py-1 mb-2 w-full"
+              />
+              <textarea
+                name="bio"
+                value={profile.bio}
+                onChange={handleInputChange}
+                placeholder="Bio"
+                className="border rounded px-2 py-1 mb-2 w-full"
+              />
+              <input
+                type="text"
+                name="image"
+                value={profile.image}
+                onChange={handleInputChange}
+                placeholder="Image URL"
+                className="border rounded px-2 py-1 mb-2 w-full"
+              />
+              <button
+                onClick={handleSaveProfile}
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+              >
+                Save
+              </button>
+            </>
+          ) : (
+            <>
+              <h2 className="text-lg font-bold">{profile.name}</h2>
+              <p className="text-gray-600">{profile.email}</p>
+              <p className="text-gray-600">{profile.phone}</p>
+              <p className="text-gray-600">{profile.bio}</p>
+              <a
+                href={profile.image}
+                className="text-blue-500 hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {profile.image}
+              </a>
+              <button
+                onClick={() => setIsEditing(true)}
+                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+              >
+                Edit
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>
   );
 };
+
 
 export default Profile;
