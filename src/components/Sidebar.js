@@ -1,14 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Logo from '../LOGO/Logo.jpeg'; // Correctly import the logo image
 
 const Sidebar = () => {
   return (
     <div className="bg-gray-800 text-white h-screen p-4 flex flex-col justify-between">
       <div>
-        <div className="mb-8">
-          <Link to='/'> LOGO</Link>   
+        <div className="mb-8 text-center">
+          <Link to="/">
+            <img src={Logo} alt="Logo" className="w-24 h-24 mx-auto rounded-full" />
+          </Link>
         </div>
-        <nav className="">
+        <nav>
           <Link to="/dashboard" className="block py-2 px-4 bg-gray-800 hover:bg-gray-700">Dashboard</Link>
           <Link to="/add-project" className="block py-2 px-4 bg-gray-800 hover:bg-gray-700">Add Projects</Link>
           <Link to="/proposals" className="block py-2 px-4 bg-gray-800 hover:bg-gray-700">Proposals</Link>
