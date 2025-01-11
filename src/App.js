@@ -11,6 +11,7 @@ import Settings from './components/Settings';
 import Profile from './components/Profile';
 import LinkPage from './components/LinkPage';
 import Proposals from './components/Proposals';
+import Projects   from './components/Projects';
 import AddProjects from './components/AddProjects';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="/linkpage" element={<LinkPage />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/projects" element={< Projects/>} />
           </Routes>
         </div>
       </div>
@@ -39,7 +41,7 @@ function App() {
 
 const SidebarRenderer = () => {
   const location = useLocation();
-  const dashboardRoutes = ['/dashboard', '/add-project', '/proposals', '/linkpage', '/profile', '/settings'];
+  const dashboardRoutes = ['/dashboard', '/add-project', '/proposals', '/linkpage', '/profile', '/projects','/settings'];
   
   return dashboardRoutes.includes(location.pathname) ? <Sidebar /> : null;
 };

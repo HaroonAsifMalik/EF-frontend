@@ -18,6 +18,7 @@ const Sidebar = () => {
           <Link to="/proposals" className="block py-2 px-4 bg-gray-800 hover:bg-gray-700">Proposals</Link>
           <Link to="/linkpage" className="block py-2 px-4 bg-gray-800 hover:bg-gray-700">Link Your Accounts</Link>
           <Link to="/profile" className="block py-2 px-4 bg-gray-800 hover:bg-gray-700">Profile</Link>
+          <Link to="/projects" className="block py-2 px-4 bg-gray-800 hover:bg-gray-700">Scraped Projects</Link>
           <Link to="/settings" className="block py-2 px-4 bg-gray-800 hover:bg-gray-700">Settings</Link>
         </nav>
       </div>
