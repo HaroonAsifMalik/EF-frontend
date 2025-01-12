@@ -6,7 +6,7 @@ const Profile = () => {
     return storedUser
       ? JSON.parse(storedUser)
       : {
-          name: '',
+          display_name: '',
           email: '',
           accounts: [],
           badges: 0,

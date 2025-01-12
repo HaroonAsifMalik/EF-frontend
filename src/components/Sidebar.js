@@ -4,6 +4,13 @@ import { Link } from 'react-router-dom';
 
 
 const Sidebar = () => {
+
+  const logouthandler = () => {
+    localStorage.clear();
+    window.location.href = "/"; 
+  };
+
+
   return (
     <div className="bg-gray-800 text-white h-screen p-4 flex flex-col justify-between">
       <div>
@@ -28,7 +35,7 @@ const Sidebar = () => {
           <input type="checkbox" className="form-checkbox h-5 w-5 text-blue-600" />
         </div>
         <Link to="/help-support" className="block py-2 px-4 hover:bg-gray-800 rounded">Help/Support</Link>
-        <Link to="/" className="block py-2 px-4 hover:bg-gray-800 rounded">Log out</Link>
+        <Link  onClick={logouthandler} className="block py-2 px-4 hover:bg-gray-800 rounded">Log out</Link>
       </div>
     </div>
   );
