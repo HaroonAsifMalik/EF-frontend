@@ -23,17 +23,21 @@ const faqData = [
 
 function FAQSection() {
   return (
-    <section className="p-20 bg-white text-center">
-      <h2 className="text-3xl font-bold mb-8">FAQs</h2>
-      <div className="text-left mx-auto max-w-4xl">
-        {faqData.map((faq, index) => (
-          <FAQ key={index} que={faq.que} ans={faq.ans} />
-        ))}
-        <button className="bg-black text-white px-6 py-3 rounded hover:bg-gray-700 mt-8">
-          Still have questions? Contact Us
-        </button>
-      </div>
-    </section>
+    <section
+  id="faqs" // Add this ID for smooth scrolling
+  className="p-20 bg-white text-center"
+>
+  <h2 className="text-3xl font-bold mb-8">FAQs</h2>
+  <div className="text-left mx-auto max-w-4xl">
+    {faqData.map((faq, index) => (
+      <FAQ key={index} que={faq.que} ans={faq.ans} />
+    ))}
+    <button className="bg-black text-white px-6 py-3 rounded hover:bg-gray-700 mt-8">
+      Still have questions? Contact Us
+    </button>
+  </div>
+</section>
+
   );
 }
 

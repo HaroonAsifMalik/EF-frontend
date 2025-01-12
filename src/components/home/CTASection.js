@@ -20,20 +20,24 @@ const featuresData = [
 
 function CTASection() {
   return (
-    <section className="p-20 bg-gray-100 text-center">
-      <h2 className="text-3xl font-bold mb-8">Unlock Your Potential with Our Powerful Bidding Platform</h2>
-      <div className="flex justify-around">
-        {featuresData.map((feature, index) => (
-          <FeatureCard
-            key={index}
-            img={feature.img}
-            alt={feature.alt}
-            title={feature.title}
-            description={feature.description}
-          />
-        ))}
-      </div>
-    </section>
+    <section
+  id="services" // Add this ID for smooth scrolling
+  className="p-20 bg-gray-100 text-center"
+>
+  <h2 className="text-3xl font-bold mb-8">Unlock Your Potential with Our Powerful Bidding Platform</h2>
+  <div className="flex justify-around">
+    {featuresData.map((feature, index) => (
+      <FeatureCard
+        key={index}
+        img={feature.img}
+        alt={feature.alt}
+        title={feature.title}
+        description={feature.description}
+      />
+    ))}
+  </div>
+</section>
+
   );
 }
 
