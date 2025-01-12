@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../LOGO/Logo.jpeg'; // Correctly import the logo image
+
+
 
 const Sidebar = () => {
   return (
@@ -8,7 +9,7 @@ const Sidebar = () => {
       <div>
         <div className="mb-8 text-center">
           <Link to="/">
-            <img src={Logo} alt="Logo" className="w-24 h-24 mx-auto rounded-full" />
+            <img src="/images/logo.jpeg" alt="Logo" className="w-24 h-24 mx-auto rounded-full" />
           </Link>
         </div>
         <nav>
@@ -17,6 +18,7 @@ const Sidebar = () => {
           <Link to="/proposals" className="block py-2 px-4 bg-gray-800 hover:bg-gray-700">Proposals</Link>
           <Link to="/linkpage" className="block py-2 px-4 bg-gray-800 hover:bg-gray-700">Link Your Accounts</Link>
           <Link to="/profile" className="block py-2 px-4 bg-gray-800 hover:bg-gray-700">Profile</Link>
+          <Link to="/projects" className="block py-2 px-4 bg-gray-800 hover:bg-gray-700">Scraped Projects</Link>
           <Link to="/settings" className="block py-2 px-4 bg-gray-800 hover:bg-gray-700">Settings</Link>
         </nav>
       </div>

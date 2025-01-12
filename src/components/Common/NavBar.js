@@ -1,7 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Link as ScrollLink } from "react-scroll";
-import Logo from "C:/Users/Laptops-Collection/fyp/empower-freelancers-ui/src/LOGO/Logo.jpeg"; // Logo path
 
 // Static data for navbar links
 const navbarLinks = [
@@ -16,12 +15,31 @@ function Navbar() {
       <div className="container flex flex-wrap items-center justify-between mx-auto">
         {/* Logo Section */}
         <a href="/" className="flex items-center">
-          <img
-            src={Logo}
-            alt="Logo"
-            className="h-8 w-8 rounded-full" // Smaller logo size
-          />
+          <img src="/images/logo.jpeg" alt="Logo" className="h-10 w-10 rounded-full" /> {/* Logo with circular shape */}
         </a>
+
+        {/* Hamburger Menu Button for Mobile */}
+        <button
+          data-collapse-toggle="navbar-default"
+          type="button"
+          className="inline-flex items-center p-2 ml-3 text-sm text-white rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
+          aria-controls="navbar-default"
+          aria-expanded="false"
+        >
+          <span className="sr-only">Open main menu</span>
+          <svg
+            className="w-6 h-6"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fillRule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clipRule="evenodd"
+            ></path>
+          </svg>
+        </button>
 
         {/* Navbar Links - Centered */}
         <div className="w-full md:w-auto flex justify-center">
