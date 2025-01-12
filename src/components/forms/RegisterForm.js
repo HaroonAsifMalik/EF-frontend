@@ -39,8 +39,8 @@ export function RegisterForm() {
         if (data.access && data.refresh) {
           localStorage.setItem("accessToken", data.access);
           localStorage.setItem("refreshToken", data.refresh);
-          console.log("Registration successful!");
-          window.location.href = "/dashboard";
+          localStorage.setItem("user", JSON.stringify(data.user));
+          window.location.href = "/profile";
         } else {
           console.log(data.message || "Something went wrong!");
         }

@@ -19,18 +19,23 @@ const benefits = [
 
 function BenefitsSection() {
   return (
-    <section className="p-20 text-center" style={{ backgroundColor: "white" }}>
-      <h2 className="text-3xl font-bold mb-8">Discover the Power of Auto Bidding</h2>
-      <div className="flex justify-around">
-        {benefits.map((benefit, index) => (
-          <FeatureCard
-            key={index}
-            title={benefit.title}
-            description={benefit.description}
-          />
-        ))}
-      </div>
-    </section>
+    <section
+  id="discover" // Add this ID for smooth scrolling
+  className="p-20 text-center"
+  style={{ backgroundColor: "white" }}
+>
+  <h2 className="text-3xl font-bold mb-8">Discover the Power of Auto Bidding</h2>
+  <div className="flex justify-around">
+    {benefits.map((benefit, index) => (
+      <FeatureCard
+        key={index}
+        title={benefit.title}
+        description={benefit.description}
+      />
+    ))}
+  </div>
+</section>
+
   );
 }
 
