@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Profile = () => {
+
   const getInitialUser = () => {
     const storedUser = localStorage.getItem('user');
     return storedUser
@@ -24,9 +25,20 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Fetch the user profile data from the backend
   useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(user));
-  }, [user]);
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch('https://your-backend-api.com/profile'); // Replace with your backend API endpoint
+        const data = await response.json();
+        setProfile(data);
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   useEffect(() => {
     const fetchTips = async () => {
@@ -49,20 +61,31 @@ const Profile = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+    setProfile({ ...profile, [name]: value });
   };
 
-  const handleSkillsChange = (e) => {
-    setUser({ ...user, skills: e.target.value.split(',') });
-  };
+  const handleSaveProfile = async () => {
+    try {
+      const response = await fetch(`https://your-backend-api.com/profile/${profile.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(profile),
+      });
+      const updatedProfile = await response.json();
 
-  const handleCategoriesChange = (e) => {
-    setUser({ ...user, categories: e.target.value.split(',') });
+      // Update the frontend with the updated profile
+      setProfile(updatedProfile);
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
   };
 
   return (
     <div className="flex-grow p-6 bg-gray-100 text-black">
       <div className="bg-white p-6 rounded-lg shadow mb-6">
+
+
         <div className="flex items-center mb-4">
           <img src={user.image_url || '/default-avatar.png'} alt="User" className="w-24 h-24 rounded-full mr-4" />
           <div>
@@ -174,5 +197,6 @@ const Profile = () => {
     </div>
   );
 };
+
 
 export default Profile;
