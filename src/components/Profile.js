@@ -76,7 +76,7 @@ const Profile = () => {
                   className="border rounded px-2"
                 />
               ) : (
-                user.name
+                user.display_name
               )}
             </h1>
             <p className="text-gray-600">
@@ -98,7 +98,7 @@ const Profile = () => {
           {/* User Stats */}
           <div className="bg-gray-50 p-4 rounded-lg shadow">
             <h2 className="text-lg font-bold">Badges</h2>
-            <p className="text-gray-600">{user.badges}</p>
+            <p className="text-gray-600">{user.badges|| 0}</p>
           </div>
           <div className="bg-gray-50 p-4 rounded-lg shadow">
             <h2 className="text-lg font-bold">Account</h2>
