@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const Profile = () => {
-
   const getInitialUser = () => {
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem("user");
     return storedUser
       ? JSON.parse(storedUser)
       : {
-          display_name: '',
-          email: '',
+          display_name: "",
+          email: "",
+          image_url: "", 
           accounts: [],
           badges: 0,
           rating: 0,
@@ -25,15 +25,16 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch the user profile data from the backend
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch('https://your-backend-api.com/profile'); // Replace with your backend API endpoint
+        const response = await fetch("http://127.0.0.1:8000/api/v1/accounts/profile"); // Replace with your backend API endpoint
         const data = await response.json();
-        setProfile(data);
+        console.log(data)
+        debugger
+        setUser(data); 
       } catch (error) {
-        console.error('Error fetching profile:', error);
+        console.error("Error fetching profile:", error);
       }
     };
 
@@ -43,9 +44,11 @@ const Profile = () => {
   useEffect(() => {
     const fetchTips = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/v1/guidance/tips/');
+        const response = await fetch(
+          "http://127.0.0.1:8000/api/v1/guidance/tips/"
+        );
         if (!response.ok) {
-          throw new Error('Failed to fetch tips');
+          throw new Error("Failed to fetch tips");
         }
         const data = await response.json();
         setTips(data);
@@ -61,40 +64,58 @@ const Profile = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setProfile({ ...profile, [name]: value });
+    setUser({ ...user, [name]: value });
+  };
+
+  const handleSkillsChange = (e) => {
+    setUser({
+      ...user,
+      skills: e.target.value.split(",").map((skill) => skill.trim()),
+    });
+  };
+
+  const handleCategoriesChange = (e) => {
+    setUser({
+      ...user,
+      categories: e.target.value.split(",").map((category) => category.trim()),
+    });
   };
 
   const handleSaveProfile = async () => {
     try {
-      const response = await fetch(`https://your-backend-api.com/profile/${profile.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(profile),
-      });
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/v1/accounts/profile/`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(user),
+        }
+      );
       const updatedProfile = await response.json();
 
-      // Update the frontend with the updated profile
-      setProfile(updatedProfile);
+      setUser(updatedProfile);
       setIsEditing(false);
     } catch (error) {
-      console.error('Error updating profile:', error);
+      console.error("Error updating profile:", error);
     }
   };
 
   return (
     <div className="flex-grow p-6 bg-gray-100 text-black">
       <div className="bg-white p-6 rounded-lg shadow mb-6">
-
-
         <div className="flex items-center mb-4">
-          <img src={user.image_url || '/default-avatar.png'} alt="User" className="w-24 h-24 rounded-full mr-4" />
+          <img
+            src={user.image_url || "/default-avatar.png"}
+            alt="User"
+            className="w-24 h-24 rounded-full mr-4"
+          />
           <div>
             <h1 className="text-2xl font-bold">
               {isEditing ? (
                 <input
                   type="text"
-                  name="name"
-                  value={user.name}
+                  name="display_name"
+                  value={user.display_name}
                   onChange={handleInputChange}
                   className="border rounded px-2"
                 />
@@ -118,14 +139,13 @@ const Profile = () => {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* User Stats */}
           <div className="bg-gray-50 p-4 rounded-lg shadow">
             <h2 className="text-lg font-bold">Badges</h2>
-            <p className="text-gray-600">{user.badges|| 0}</p>
+            <p className="text-gray-600">{user.badges || 0}</p>
           </div>
           <div className="bg-gray-50 p-4 rounded-lg shadow">
             <h2 className="text-lg font-bold">Account</h2>
-            <p className="text-gray-600">{user.accounts.join(', ')}</p>
+            <p className="text-gray-600">{user.accounts.join(", ")}</p>
           </div>
           <div className="bg-gray-50 p-4 rounded-lg shadow">
             <h2 className="text-lg font-bold">Ratings</h2>
@@ -141,12 +161,12 @@ const Profile = () => {
               {isEditing ? (
                 <input
                   type="text"
-                  value={user.skills.join(', ')}
+                  value={user.skills.join(", ")}
                   onChange={handleSkillsChange}
                   className="border rounded px-2"
                 />
               ) : (
-                user.skills.join(', ')
+                user.skills.join(", ")
               )}
             </p>
           </div>
@@ -156,12 +176,12 @@ const Profile = () => {
               {isEditing ? (
                 <input
                   type="text"
-                  value={user.categories.join(', ')}
+                  value={user.categories.join(", ")}
                   onChange={handleCategoriesChange}
                   className="border rounded px-2"
                 />
               ) : (
-                user.categories.join(', ')
+                user.categories.join(", ")
               )}
             </p>
           </div>
@@ -171,10 +191,10 @@ const Profile = () => {
           </div>
         </div>
         <button
-          onClick={() => setIsEditing(!isEditing)}
+          onClick={isEditing ? handleSaveProfile : () => setIsEditing(true)}
           className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
         >
-          {isEditing ? 'Save' : 'Edit'}
+          {isEditing ? "Save" : "Edit"}
         </button>
       </div>
       <div className="bg-white p-6 rounded-lg shadow">
@@ -197,6 +217,5 @@ const Profile = () => {
     </div>
   );
 };
-
 
 export default Profile;
