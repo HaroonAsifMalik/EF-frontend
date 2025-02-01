@@ -3,23 +3,23 @@ import React, { useState } from 'react';
 const pricingPlans = [
   {
     title: "Basic",
-    price: 9.99, // base price per month
+    price: "---",
     user: "1 User",
-    storage: 10, // base storage in GB
+    storage: "--",
     support: "Basic Support"
   },
   {
     title: "Pro",
-    price: 19.99,
+    price: "---",
     user: "5 Users",
-    storage: 50,
+    storage:"---",
     support: "Prioritized Support"
   },
   {
-    title: "Enterprise",
-    price: "Custom Pricing",
+    title: "pro +",
+    price: "---",
     user: "Unlimited Users",
-    storage: "Unlimited Storage",
+    storage: "---",
     support: "Dedicated Support"
   }
 ];
