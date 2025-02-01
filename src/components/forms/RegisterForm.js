@@ -40,7 +40,7 @@ export function RegisterForm() {
           localStorage.setItem("accessToken", data.access);
           localStorage.setItem("refreshToken", data.refresh);
           localStorage.setItem("user", JSON.stringify(data.user));
-          window.location.href = "/profile";
+          window.location.href = "/accountlink";
         } else {
           console.log(data.message || "Something went wrong!");
         }

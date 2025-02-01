@@ -8,14 +8,14 @@ const Profile = () => {
       : {
           display_name: "",
           email: "",
-          image_url: "", 
+          image: "", 
           accounts: [],
           badges: 0,
-          rating: 0,
-          response_time: 0,
+          contract_status: '',
+          hour_rate: '',
           skills: [],
           categories: [],
-          job_success_rate: 0,
+          job_count: 0,
         };
   };
 
@@ -25,22 +25,7 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await fetch("http://127.0.0.1:8000/api/v1/accounts/profile"); // Replace with your backend API endpoint
-        const data = await response.json();
-        console.log(data)
-        debugger
-        setUser(data); 
-      } catch (error) {
-        console.error("Error fetching profile:", error);
-      }
-    };
-
-    fetchProfile();
-  }, []);
-
+  
   useEffect(() => {
     const fetchTips = async () => {
       try {
@@ -105,7 +90,7 @@ const Profile = () => {
       <div className="bg-white p-6 rounded-lg shadow mb-6">
         <div className="flex items-center mb-4">
           <img
-            src={user.image_url || "/default-avatar.png"}
+            src={user.image || "/default-avatar.png"}
             alt="User"
             className="w-24 h-24 rounded-full mr-4"
           />
@@ -141,61 +126,37 @@ const Profile = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-gray-50 p-4 rounded-lg shadow">
             <h2 className="text-lg font-bold">Badges</h2>
-            <p className="text-gray-600">{user.badges || 0}</p>
+            <p className="text-gray-600">{user.badges || "None"}</p>
           </div>
           <div className="bg-gray-50 p-4 rounded-lg shadow">
-            <h2 className="text-lg font-bold">Account</h2>
-            <p className="text-gray-600">{user.accounts.join(", ")}</p>
+            <h2 className="text-lg font-bold">Contract status</h2>
+            <p className="text-gray-600">{user.contract_status}</p>
           </div>
           <div className="bg-gray-50 p-4 rounded-lg shadow">
-            <h2 className="text-lg font-bold">Ratings</h2>
-            <p className="text-gray-600">{user.rating}</p>
-          </div>
-          <div className="bg-gray-50 p-4 rounded-lg shadow">
-            <h2 className="text-lg font-bold">Response Time</h2>
-            <p className="text-gray-600">{user.response_time}</p>
+            <h2 className="text-lg font-bold">hour rate</h2>
+            <p className="text-gray-600">{user.hour_rate}</p>
           </div>
           <div className="bg-gray-50 p-4 rounded-lg shadow">
             <h2 className="text-lg font-bold">Skills</h2>
-            <p className="text-gray-600">
-              {isEditing ? (
-                <input
-                  type="text"
-                  value={user.skills.join(", ")}
-                  onChange={handleSkillsChange}
-                  className="border rounded px-2"
-                />
-              ) : (
-                user.skills.join(", ")
-              )}
-            </p>
+            <p className="text-gray-600">{user.skills?.join(", ") || "No skills listed"}</p>
+
           </div>
           <div className="bg-gray-50 p-4 rounded-lg shadow">
             <h2 className="text-lg font-bold">Categories</h2>
-            <p className="text-gray-600">
-              {isEditing ? (
-                <input
-                  type="text"
-                  value={user.categories.join(", ")}
-                  onChange={handleCategoriesChange}
-                  className="border rounded px-2"
-                />
-              ) : (
-                user.categories.join(", ")
-              )}
-            </p>
+            <p className="text-gray-600">{user.categories?.join(", ") || "No categories listed"}</p>
+
           </div>
           <div className="bg-gray-50 p-4 rounded-lg shadow">
             <h2 className="text-lg font-bold">Job Success Score</h2>
-            <p className="text-gray-600">{user.job_success_rate}%</p>
+            <p className="text-gray-600">{user.job_count}%</p>
           </div>
         </div>
-        <button
+        {/* <button
           onClick={isEditing ? handleSaveProfile : () => setIsEditing(true)}
           className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
         >
           {isEditing ? "Save" : "Edit"}
-        </button>
+        </button> */}
       </div>
       <div className="bg-white p-6 rounded-lg shadow">
         <h2 className="text-lg font-bold">Tips to Enhance Profile</h2>
