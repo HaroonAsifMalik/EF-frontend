@@ -1,14 +1,16 @@
+import React from 'react';
+import Input from './input/Input';
 
-import React from "react";
-import Input from "./input/Input";
+import { useContext } from 'react';
+import { AuthContext } from './AuthContext';
 
-export function LoginForm() {
+const LoginForm = () => {
   const [credentials, setCredentials] = React.useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
-  const [errorMessage, setErrorMessage] = React.useState("");
+  const [errorMessage, setErrorMessage] = React.useState('');
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -18,40 +20,43 @@ export function LoginForm() {
     }));
   }
 
+  const { setIsAuthenticated } = useContext(AuthContext); // Use context
   function handleSubmit(event) {
     event.preventDefault();
 
-    fetch("http://localhost:8000/api/v1/accounts/sign-in/", {
-      method: "POST",
+    fetch('http://localhost:8000/api/v1/accounts/sign-in/', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(credentials),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Login failed! Please check your credentials.");
+          throw new Error('Login failed! Please check your credentials.');
         }
         return response.json();
       })
       .then((data) => {
+        console.log('Login Response:', data);
         if (data.access && data.refresh) {
-          localStorage.setItem("accessToken", data.access);
-          localStorage.setItem("refreshToken", data.refresh);
-          localStorage.setItem("user", JSON.stringify(data.user));
-          window.location.href = "/dashboard";
+          localStorage.setItem('accessToken', data.access);
+          localStorage.setItem('refreshToken', data.refresh);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          setIsAuthenticated(true); // Update authentication state
+          window.location.href = '/accountlink';
         } else {
-          setErrorMessage(data.message || "Login failed!");
+          setErrorMessage(data.message || 'Login failed!');
         }
       })
       .catch((error) => {
-        console.error("Error:", error);
-        setErrorMessage(error.message || "An unexpected error occurred.");
+        console.error('Error:', error);
+        setErrorMessage(error.message || 'An unexpected error occurred.');
       });
 
     setCredentials({
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     });
   }
 
@@ -86,7 +91,7 @@ export function LoginForm() {
           </button>
 
           <p className="text-sm text-gray-600 text-center mt-4">
-            Don't have an account?{" "}
+            Don't have an account?{' '}
             <a
               href="/register"
               className="text-tertiary hover:text-secondary transition duration-200 underline"
@@ -98,4 +103,6 @@ export function LoginForm() {
       </div>
     </div>
   );
-}
+};
+
+export default LoginForm;

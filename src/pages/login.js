@@ -1,15 +1,14 @@
-// Login.js
 import React from 'react';
 import Navbar from '../components/Common/NavBar';
 import Footer from '../components/Common/footers/Footer';
-import { LoginForm } from '../components/loginform';
+import LoginForm from '../components/loginform';
 
-const Login = () => {
+const Login = ({ setIsAuthenticated }) => {
   return (
     <div>
-     <Navbar/>
-      <LoginForm/>
-     <Footer/>
+      <Navbar />
+      <LoginForm setIsAuthenticated={setIsAuthenticated} />
+      <Footer />
     </div>
   );
 };

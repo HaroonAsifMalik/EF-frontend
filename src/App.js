@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Home from './pages/home';
@@ -11,38 +11,55 @@ import Settings from './components/Settings';
 import Profile from './components/Profile';
 import LinkPage from './components/LinkPage';
 import Proposals from './components/Proposals';
-import Projects   from './components/Projects';
+import Projects from './components/Projects';
 import AddProjects from './components/AddProjects';
+import ProtectedRoute from './components/ProtectedRoute';
+import {AuthProvider} from './components/AuthContext'
+import AccountLink from './pages/AccountLink';
 
 function App() {
   return (
-    <Router>
-      <div className="flex">
-        <SidebarRenderer />
-        <div className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<MainDashboard />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/add-project" element={<AddProjects />} />
-            <Route path="/proposals" element={<Proposals />} />
-            <Route path="/linkpage" element={<LinkPage />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/projects" element={< Projects/>} />
-          </Routes>
+    <AuthProvider>
+      <Router>
+        <div className="flex">
+          <SidebarRenderer />
+          <div className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/about" element={<About />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/accountlink" element={<AccountLink />} />
+
+                <Route path="/dashboard" element={<MainDashboard />} />
+                <Route path="/add-project" element={<AddProjects />} />
+                <Route path="/proposals" element={<Proposals />} />
+                <Route path="/linkpage" element={<LinkPage />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/projects" element={<Projects />} />
+              </Route>
+            </Routes>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 }
 
 const SidebarRenderer = () => {
   const location = useLocation();
-  const dashboardRoutes = ['/dashboard', '/add-project', '/proposals', '/linkpage', '/profile', '/projects','/settings'];
-  
+  const dashboardRoutes = [
+    '/dashboard',
+    '/add-project',
+    '/proposals',
+    '/linkpage',
+    '/profile',
+    '/projects',
+    '/settings',
+  ];
+
   return dashboardRoutes.includes(location.pathname) ? <Sidebar /> : null;
 };
 
