@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const MainDashboard = () => {
+  const [jobCount, setJobCount] = useState(0);
+  const [hoursPerWeek, setHoursPerWeek] = useState(0);
+
+  useEffect(() => {
+    const storedJobCount = localStorage.getItem('job_count');
+    const storedHoursPerWeek = localStorage.getItem('hours_per_week');
+    
+    if (storedJobCount) setJobCount(parseInt(storedJobCount, 10));
+    if (storedHoursPerWeek) setHoursPerWeek(parseInt(storedHoursPerWeek, 10));
+  }, []);
+
   return (
     <div className="flex-grow p-6 bg-gray-100 text-black">
       {/* Dashboard Header */}
@@ -16,12 +27,12 @@ const MainDashboard = () => {
           <p className="text-3xl text-gray-900">16</p>
         </div>
         <div className="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all">
-          <h2 className="text-lg font-semibold text-gray-800">Proposals Checked</h2>
-          <p className="text-3xl text-gray-900">4</p>
+          <h2 className="text-lg font-semibold text-gray-800">Job Count</h2>
+          <p className="text-3xl text-gray-900">{jobCount}</p>
         </div>
         <div className="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all">
-          <h2 className="text-lg font-semibold text-gray-800">Current Projects</h2>
-          <p className="text-3xl text-gray-900">7</p>
+          <h2 className="text-lg font-semibold text-gray-800">Hours Per Week</h2>
+          <p className="text-3xl text-gray-900">{hoursPerWeek}</p>
         </div>
         <div className="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all">
           <h2 className="text-lg font-semibold text-gray-800">Total Connects</h2>
